@@ -1,1 +1,4 @@
 token.txt
+dist/
+.parcel-cache/
+font-awesome/

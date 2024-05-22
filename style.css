@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Oswald:wght@200..700&display=swap');
+
+.font-oswald {
+	font-family: "Oswald", sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #00a;
+}
+
+body {
+	font-size: 16px;
+	font-family: "Oswald";
+}
+
+nav {
+	max-width: 400px;
+	width: 30%;
+	min-width: 200px;
+	height: fit-content; /* fixed height */
+
+	margin: 20px auto;
+	border-radius: 60px;
+
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+	gap: 15px;
+	color: #00a;
+
+	padding: 5px;
+
+	border: 1px solid #00a;
+	box-shadow: 0 0 2px 1px #0004;
+	background-color: #ddd;
+}
+
+nav label {
+	position: relative;
+	flex-grow: 1;
+}
+
+nav label i {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+nav input {
+	width: 100%;
+	border-radius: 20px;
+	outline: none;
+	border: 1px solid #aaa9;
+	padding: 10px;
+	background-color: #eee;
+}
+
+nav input:focus {
+	border-color: #000;
+}
+
+.add-btn {
+	/* flex shrink  */
+	outline: none;
+	cursor: pointer;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #adf;
+	color: #000;
+	border: 2px solid #000;
+}
+
+.add-btn:hover {
+	background-color: #ddf;
+	transition: .2s linear;
+}
+
+.add-btn i {
+	color: inherit;
+}
+
+
+
+#shelf {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+	grid-auto-rows: 225px;
+	gap: 40px 20px;
+	justify-content: space-between;
+	padding: 20px 5% 20px;
+}
+
+.book-view {
+	position: relative;
+	object-fit: cover;
+	box-shadow: 2 5 10px 0px #0005;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.book-view img {
+	width: 100%;
+	height: 100%;
+}
+
+.book-view .book-info {
+	display: grid;
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	grid-template-rows: 1fr auto;
+	gap: 10px;
+	padding: 5px;
+	background-color: #0005;
+	opacity: 0;
+}
+
+.book-view .book-author {
+	font-family: "Caveat", cursive;
+	font-size: 1.4rem;
+	color: #fff;
+}
+
+.book-title, .book-author {
+	overflow: hidden;
+}
+
+.book-view:hover > .book-info {
+	visibility: visible;
+	opacity: 1;
+	transition: .2s linear;
+}
