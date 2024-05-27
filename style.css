@@ -1,7 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Oswald:wght@200..700&display=swap');
 
+.alert {
+	position: fixed;
+	top: 30px;
+	width: fit-content;
+	min-width: 180px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 10px 40px;
+	background-color: #eee;
+	color: #000;
+	z-index: 99;
+	box-shadow: 0 0 10px 1px #0008;
+	border: 1px solid #0005;
+	animation: shade .4s linear 1 normal forwards;
+	border-radius: 20px;
+}
+
 .font-oswald {
 	font-family: "Oswald", sans-serif;
+}
+
+.active {
+	visibility: visible !important;
+	transition: 0 !important;
 }
 
 * {
@@ -16,14 +38,123 @@ body {
 	font-family: "Oswald";
 }
 
+#new-book-container {
+	visibility: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #0006;
+	z-index: 9;
+}
+
+#new-book {
+	margin: 20px auto;
+	width: 95%;
+	max-width: 400px;
+	background-color: #ddd;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+#new-book-title {
+	text-align: center;
+	font-size: 1.15rem;
+}
+
+#new-book-btns {
+	padding: 10px;
+	display: flex;
+	gap: 15px;
+}
+
+#new-book-btns button {
+	height: 40px;
+	padding: 10px 5%;
+	border-radius: 5px;
+	background-color: #222;
+	color: #ddd;
+}
+
+#search-isbn-container {
+	display: flex;
+	gap: 10px;
+	margin: 0 auto;
+	padding: 10px 0;
+	width: fit-content;
+}
+
+#search-isbn-container input.empty {
+	transition: .3s border-color;
+	border-width: 2px;
+	border-color: #a22;
+}
+
+#search-isbn-container button {
+	height: 30px;
+	padding: 10px 10px;
+	border-width: 1px;
+	gap: 10px;
+}
+
+#add-isbn i {
+	visibility: hidden;
+	color: inherit;
+}
+
+#add-isbn.loading i {
+	visibility: visible;
+}
+
+
+input {
+	border-radius: 20px;
+	outline: none;
+	border: 1px solid #8889;
+	padding: 10px;
+	height: 30px;
+	background-color: #eee;
+	transition: .2s linear border-color;
+}
+
+input:focus, #search-isbn-container input.empty:focus {
+	border-width: 1px;
+	border-color: #000;
+}
+
+button {
+	--color-hover: #ddd;
+	--background-color-hover: #000;
+	outline: none;
+	color: #000;
+	border: 2px solid #000;
+	background-color: #adf;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+
+	border-radius: 20px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: var(--background-color-hover);
+	color: var(--color-hover);
+	transition: .2s linear color, .2s linear background-color;
+}
+
+
 nav {
 	max-width: 400px;
-	width: 30%;
-	min-width: 200px;
-	height: fit-content; /* fixed height */
+	width: 95%;
+	height: 50px; 
 
 	margin: 20px auto;
-	border-radius: 60px;
+	border-radius: 25px;
 
 	display: flex;
 	align-content: center;
@@ -35,13 +166,14 @@ nav {
 	padding: 5px;
 
 	border: 1px solid #00a;
-	box-shadow: 0 0 2px 1px #0004;
+	box-shadow: 0 0 8px 2px #0004;
 	background-color: #ddd;
 }
 
 nav label {
 	position: relative;
 	flex-grow: 1;
+	height: 100%;
 }
 
 nav label i {
@@ -53,35 +185,13 @@ nav label i {
 
 nav input {
 	width: 100%;
-	border-radius: 20px;
-	outline: none;
-	border: 1px solid #aaa9;
-	padding: 10px;
-	background-color: #eee;
-}
-
-nav input:focus {
-	border-color: #000;
+	height: 100%;
 }
 
 .add-btn {
-	/* flex shrink  */
-	outline: none;
-	cursor: pointer;
 	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #adf;
-	color: #000;
-	border: 2px solid #000;
-}
-
-.add-btn:hover {
-	background-color: #ddf;
-	transition: .2s linear;
+	aspect-ratio: 1 / 1;
+	height: 100%;
 }
 
 .add-btn i {
@@ -96,20 +206,32 @@ nav input:focus {
 	grid-auto-rows: 225px;
 	gap: 40px 20px;
 	justify-content: space-between;
-	padding: 20px 5% 20px;
+	padding: 20px 5% 80px;
 }
 
 .book-view {
 	position: relative;
 	object-fit: cover;
-	box-shadow: 2 5 10px 0px #0005;
-	border-radius: 5px;
-	overflow: hidden;
+	box-shadow: 2px 5px 6px 0px #0005;
+	opacity: 0;
+	animation: shade .4s linear 1 forwards;
+
+	--border-radius: 5px;
+}
+
+@keyframes shade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .book-view img {
 	width: 100%;
 	height: 100%;
+	border-radius: var(--border-radius);
 }
 
 .book-view .book-info {
@@ -125,11 +247,17 @@ nav input:focus {
 	padding: 5px;
 	background-color: #0005;
 	opacity: 0;
+	border-radius: var(--border-radius);
 }
 
-.book-view .book-author {
+.book-author {
 	font-family: "Caveat", cursive;
 	font-size: 1.4rem;
+	color: #f5b868;
+}
+
+.book-title {
+	font-size: 1.2rem;
 	color: #fff;
 }
 
@@ -141,4 +269,26 @@ nav input:focus {
 	visibility: visible;
 	opacity: 1;
 	transition: .2s linear;
+}
+
+.book-info > .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+	
+	font-size: 20px;
+	
+	color: #d22;
+	background-color: #000;
+	border: none;
+
+	border-radius: 50%;
+	opacity: .5;
+	transition: .3s linear;
+	cursor: pointer;
+}
+
+.book-info > .close:hover {
+	opacity: 1;
 }
