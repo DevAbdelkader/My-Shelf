@@ -211,7 +211,7 @@ nav input {
 .book-view {
 	position: relative;
 	object-fit: cover;
-	box-shadow: 2px 5px 6px 0px #0005;
+	filter: drop-shadow(0 0 3px #0005);
 	opacity: 0;
 	animation: shade .4s linear 1 forwards;
 
