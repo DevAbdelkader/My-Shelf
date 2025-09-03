@@ -1,5 +1,5 @@
 import { fetchCover, getBase64 } from "./core/cover.js";
-import { storeBook, isBooksEmpty, getAllBooks, initBooksStorage } from "./core/storage.js";
+import { storeBook, isBooksEmpty, getAllBooks, initBooksStorage, searchStoredBook } from "./core/storage.js";
 import { bookElement, clearBooks } from "./core/shelf.js";
 import { getBookData } from "./core/api.js";
 import customAlert from "./components/customAlert.js";
@@ -10,7 +10,7 @@ import customAlert from "./components/customAlert.js";
 renderBooks();
 
 
-
+const searchInput = document.getElementById("search");
 const newBook = document.getElementById("new-book-container");
 const isbnInput = document.querySelector("input[name=isbn]");
 const addISBN = document.getElementById("add-isbn");
@@ -19,6 +19,8 @@ const closeBtn = document.getElementById("new-book-close");
 const newBookBtn = document.getElementById("new-book-btn");
 newBookBtn.onclick = openNewBook;
 
+
+searchInput.oninput = searchStoredBook(200);
 isbnInput.oninput = ({target}) => target.classList.remove("empty")
 addISBN.addEventListener("click", () => {
 	if (addISBN.classList.contains("loading")) return;

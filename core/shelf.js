@@ -1,8 +1,9 @@
 import { getImageURL } from "./cover.js";
+import { removeBook } from "./storage.js";
 
-// ------------------------------------------
+// ---------------------------------------
 // Shelf Control : bookElement, clearBooks
-// ------------------------------------------
+// ---------------------------------------
 
 export function bookElement(data) {
   const bookView = document.createElement("div");
@@ -10,7 +11,7 @@ export function bookElement(data) {
   bookView.className = "book-view";
 
   const cover = document.createElement("img");
-  cover.src = data.cover ? getImageURL(data.cover, "image/jpeg") : "nocover.jpg";
+  cover.src = data.cover ? getImageURL(data.cover, "image/jpeg") : "assets/nocover.jpg";
 
   const info = document.createElement("div");
   info.className = "book-info";
@@ -25,9 +26,7 @@ export function bookElement(data) {
 
   removeBtn.onclick = () => {
     if (confirm("Do you want to delete this book?")) {
-      let books = JSON.parse(localStorage.getItem("books"));
-      delete books[data.key];
-      localStorage.setItem("books", JSON.stringify(books));
+      removeBook(data.key);
       bookView.remove();
     }
   }

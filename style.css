@@ -123,6 +123,10 @@ input:focus, #search-isbn-container input.empty:focus {
 	border-color: #000;
 }
 
+input:focus ~ i {
+  color: #000 !important
+}
+
 button {
 	--color-hover: #ddd;
 	--background-color-hover: #000;
@@ -290,4 +294,17 @@ nav input {
 
 .book-info > .close:hover {
 	opacity: 1;
+}
+
+#shelf:empty {
+  display: block;
+}
+
+#shelf:empty::before {
+  position: relative;
+  content: "No books found";
+  color: #777;
+  font-family: Roboto, sans-serif;
+  display: block;
+  text-align: center;
 }
