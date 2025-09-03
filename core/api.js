@@ -1,4 +1,4 @@
-import getData from "../ISBN.js";
+import getData from "./ISBN.js";
 
 export async function getBookData(isbn, resolve = () => {}, reject = () => {}, finallyFunc = () => {} ) {
   
